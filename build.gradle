@@ -1,29 +1,24 @@
 // VisualInspectionOfCssAndJs/build.gradle
 // $ gradle drivers
-
-version = '0.1.0'
-
-ext {
-    AUTO_IMPORTED_JAR_PREFIX = 'AUTOIMPORTED_'
+plugins {
+  id "com.katalon.gradle-plugin" version "0.1.1"
 }
+
+version = '0.2.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    mavenLocal()
 }
 
-configurations {
-    myconf
-}
 
 dependencies {
-    myconf group: 'com.kazurayam', name: 'materialstore', version: "0.9.5"
-    myconf group: 'net.mabboud.fontverter', name: 'FontVerter', version: "1.2.22"
-    myconf group: 'net.sf.cssbox', name: 'pdf2dom', version: "2.0.1"
-    myconf group: 'org.apache.pdfbox', name: 'fontbox', version: "2.0.26"
-    myconf group: 'org.apache.pdfbox', name: 'pdfbox', version: "2.0.25"
-    myconf group: 'org.apache.pdfbox', name: 'pdfbox-tools', version: "2.0.25"
-    myconf group: 'org.reflections', name: 'reflections', version: "0.10.2"
+    implementation group: 'com.kazurayam', name: 'materialstore', version: "0.9.5"
+    //implementation group: 'net.mabboud.fontverter', name: 'FontVerter', version: "1.2.22"
+    implementation group: 'net.sf.cssbox', name: 'pdf2dom', version: "2.0.1"
+    //implementation group: 'org.apache.pdfbox', name: 'fontbox', version: "2.0.26"
+    implementation group: 'org.apache.pdfbox', name: 'pdfbox', version: "2.0.25"
+    implementation group: 'org.apache.pdfbox', name: 'pdfbox-tools', version: "2.0.25"
+    // implementation group: 'org.reflections', name: 'reflections', version: "0.10.2"
 }
 
 task drivers {
