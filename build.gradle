@@ -1,0 +1,54 @@
+// VisualInspectionOfCssAndJs/build.gradle
+// $ gradle drivers
+
+version = '0.1.0-SNAPSHOT'
+
+ext {
+    AUTO_IMPORTED_JAR_PREFIX = 'AUTOIMPORTED_'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+configurations {
+    myconf
+}
+
+dependencies {
+    myconf group: 'com.kazurayam', name: 'materialstore', version: "0.9.5"
+    myconf group: 'net.mabboud.fontverter', name: 'FontVerter', version: "1.2.22"
+    myconf group: 'net.sf.cssbox', name: 'pdf2dom', version: "2.0.1"
+    myconf group: 'org.apache.pdfbox', name: 'fontbox', version: "2.0.26"
+    myconf group: 'org.apache.pdfbox', name: 'pdfbox', version: "2.0.25"
+    myconf group: 'org.apache.pdfbox', name: 'pdfbox-tools', version: "2.0.25"
+    myconf group: 'org.reflections', name: 'reflections', version: "0.10.2"
+}
+
+task drivers {
+    doFirst {
+        delete fileTree("Drivers") {
+            include("**/" + AUTO_IMPORTED_JAR_PREFIX + "*")
+        }
+    }
+    doLast {
+        copy { copySpec ->
+            copySpec
+                .from(project.getConfigurations().getByName("myconf"))
+                .into("Drivers")
+                .include(
+                    "**/materialstore*.jar",
+                    "**/pdfbox*.jar",
+                    "**/pdf2dom*.jar",
+                    "**/pdfbox-tools*.jar",
+                    "**/fontbox*.jar",
+                    "**/FontVerter*.jar",
+                    "**/reflections*.jar"
+                    )
+                .rename({ s ->
+                    AUTO_IMPORTED_JAR_PREFIX + s
+                    })
+        }
+    }
+}
