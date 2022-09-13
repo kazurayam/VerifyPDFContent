@@ -44,8 +44,8 @@ Store store = Stores.newInstance(root)
 
 // download the PDF, store it into a temporary file
 URL url = new URL("https://www.fsa.go.jp/policy/nisa/20170614-2/24.pdf")
-//Path tempFile = Files.createTempFile(projectDir, "temp", ".pdf") 
-Path tempFile = projectDir.resolve("24.pdf")
+Path tempFile = Files.createTempFile(projectDir, "temp", ".pdf") 
+//Path tempFile = projectDir.resolve("24.pdf")
 Files.copy(url.openStream(), tempFile, StandardCopyOption.REPLACE_EXISTING)
 
 // put the PDF into the materialstore
